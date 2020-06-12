@@ -33,4 +33,24 @@
 	<select id="memberlist" resultType="com.example.vo.MemberVO">
 		SELECT * FROM MEMBER
 	</select>
+	
+	<select id="memberlist2" resultType="com.example.vo.MemberVO">
+		SELECT * FROM
+			(SELECT 
+				USERID, PASSWORD, USERNAME, PHONE, USERAGE, JOINDATE,
+				ROW_NUMBER() OVER (ORDER BY USERID DESC) ROWN 
+			FROM 
+				MEMBER)
+		WHERE ROWN BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="count" resultType="int">
+		SELECT COUNT(*) FROM MEMBER
+	</select>
+	
+	<delete id="deleteMemberBatch" parameterType="String">
+		<foreach open="DELETE FROM MEMBER WHERE USERID IN(" close=")" collection="array" item="tmp" separator=",">
+			#{tmp}
+		</foreach>
+	</delete>
 </mapper>

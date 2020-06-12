@@ -18,13 +18,53 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import com.example.dao.ItemDAO;
+import com.example.dao.MemberDAO;
 import com.example.vo.ItemVO;
+import com.example.vo.MemberVO;
 
 @Controller
 @RequestMapping(value="/admin")
 public class AdminController {
 	@Autowired
 	private ItemDAO iDAO = null;
+	@Autowired
+	private MemberDAO mDAO = null;
+	
+	@RequestMapping(value="/member")
+	public String memberlist(Model model, @RequestParam(value="page", defaultValue="1", required=false) int page) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		
+		map.put("start", (page*10)-9);
+		map.put("end", page*10);
+		//목록
+		List<MemberVO> list = mDAO.selectMember(map);
+		
+		//개수
+		int cnt = mDAO.countBoard();
+		model.addAttribute("list", list);
+		model.addAttribute("cnt", (cnt-1)/10+1);
+		
+		return "/admin/member";
+	}
+	
+	@RequestMapping(value="/member", method=RequestMethod.POST)
+	public String memberbatch(
+			@RequestParam("btn") String btn,
+			@RequestParam(value="chk[]", required=false) String[] userid,
+			RedirectAttributes redirectAttributes) {
+		System.out.println(btn);
+		
+		if(btn.equals("일괄삭제")) {
+			mDAO.deleteMember(userid);
+		}
+		else if(btn.equals("일괄수정")) {
+			redirectAttributes.addFlashAttribute("userid", userid);
+			return "redirect:/admin/memberupdate";
+		}
+		return "redirect:/admin/member";
+	}
+	
 	
 	@RequestMapping(value="/itemupdate")
 	public String itemupdate(Model model, HttpServletRequest req) {
