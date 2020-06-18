@@ -5,16 +5,17 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>관리자 페이지</title>
+	<title>jpa실습</title>
 	<link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet"/>
 </head>
 <body>
 	<div class="container">
-		<a href="/admin/item">물품목록보기</a>
-		<a href="/admin/iteminsert">물품일괄등록</a>
-		<a href="/admin/itemorder">판매량보기</a>
-		<a href="/admin/member">회원관리</a>
-		<a href="/admin/board">게시물관리</a>
+		<h4>jpa실습</h4>
+		<hr/>
+		<a href="/student/insert">추가</a>
+		<a href="/student/delete">삭제</a>
+		<a href="/student/update">수정</a>
+		<a href="/student/select">조회</a>
 	</div>
 </body>
 </html>

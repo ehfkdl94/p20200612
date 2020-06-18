@@ -70,6 +70,11 @@ public class ItemDAOImpl implements ItemDAO{
 		return sqlFatory.openSession().update("Item.updateItemBatch", list);
 	}
 
+	@Override
+	public int deleteItemOne(int no) {
+		return sqlFatory.openSession().delete("Item.deleteItemOne", no);
+	}
+
 	
 
 }

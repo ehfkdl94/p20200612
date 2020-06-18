@@ -13,13 +13,27 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.dao.ItemDAO;
+import com.example.dao.OrderDAO;
 import com.example.vo.ItemVO;
+import com.example.vo.OrderVO;
 
 @RestController
 @CrossOrigin("*")
 public class RestItemController {
 	@Autowired
 	private ItemDAO iDAO = null;
+	
+	@Autowired
+	private OrderDAO oDAO = null;
+	
+	@RequestMapping(value = "/rest/itemorder.json", method = { RequestMethod.GET,
+			RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)
+	public @ResponseBody HashMap<String, Object> itemOrder(){
+		List<OrderVO> list = oDAO.selectItemOrder();
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("ret", list);
+		return map;
+	}
 	
 //	127.0.0.1:8082/rest/itemsearch.json?txt=사과&key=abc
 	@RequestMapping(value="/rest/itemsearch.json", method= {RequestMethod.GET, RequestMethod.POST},

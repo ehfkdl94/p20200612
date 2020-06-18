@@ -10,7 +10,7 @@
 <body>
 	<div class="container">
 		<div style="width:400px; padding:20px; border:1px solid #cccccc">
-			<form action="/member/login" method="post">
+			<form action="${pageContext.request.contextPath}/member/login" method="post">
 				<div class="form-inline" style="margin:5px;">
 					<label style="width:100px;">아이디</label>
 					<input type="text" class="form-control" name="userid" placeholder="아이디를 입력하세요"/>

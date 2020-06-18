@@ -11,6 +11,7 @@ public interface ItemDAO {
 	public ItemVO selectItemOne(int no);
 	public int updateItem(ItemVO obj);
 	public int deleteItem(int[] no);
+	public int deleteItemOne(int no);
 	public int countBoard();
 	public List<ItemVO> selectItemSearch(String txt);
 	public int insertItemBatch(List<ItemVO> list);

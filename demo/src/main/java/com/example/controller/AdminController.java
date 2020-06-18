@@ -171,4 +171,18 @@ public class AdminController {
 		return "redirect:/admin/home"; // <a href="/admin/home>자동화</a>
 	}
 	
+	//http://localhost:8082/admin/itemdeleteone?no=23
+	@RequestMapping(value="/itemdeleteone")
+	public String itemdeleteone(@RequestParam(value="no", defaultValue = "0")int no) {
+		iDAO.deleteItemOne(no);
+		
+		return "redirect:/admin/item";
+	}
+	
+	@RequestMapping(value="/itemorder")
+	public String itemorder() {
+
+		
+		return "/admin/itemorder";
+	}
 }

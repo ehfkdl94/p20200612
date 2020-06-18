@@ -36,17 +36,21 @@
 		SELECT * FROM DUAL
 	</insert>
 	
+	<select id="selectItemWhere" parameterType="int" resultType="com.example.vo.ItemVO">
+		<foreach open="SELECT * FROM ITEM WHERE ITEMNO IN(" close=")" collection="array" item="tmp" separator=",">
+			#{tmp}
+		</foreach>
+	</select>
+	
 	<delete id="deleteItemBatch" parameterType="int">
 		<foreach open="DELETE FROM ITEM WHERE ITEMNO IN(" close=")" collection="array" item="tmp" separator=",">
 			#{tmp}
 		</foreach>
 	</delete>
 	
-	<select id="selectItemWhere" parameterType="int" resultType="com.example.vo.ItemVO">
-		<foreach open="SELECT * FROM ITEM WHERE ITEMNO IN(" close=")" collection="array" item="tmp" separator=",">
-			#{tmp}
-		</foreach>
-	</select>
+	<delete id="deleteItemOne" parameterType="int">
+		DELETE FROM ITEM WHERE ITEMNO=#{no}
+	</delete>
 	
 	<update id="updateItemBatch" parameterType="java.util.List">
 		UPDATE ITEM SET
@@ -118,7 +122,7 @@
 		<foreach open="WHERE ITEMNO IN (" close=")" collection="list" item="obj" separator=",">
 		#{obj.itemno}
 		</foreach>
-
-
 	</update>
+	
+	
 </mapper>

@@ -15,8 +15,7 @@
 		<div class="container" role="main">
 
 			<h2>게시판 글쓰기</h2>
-
-			<form name="form" id="form" role="form" method="post" action="/board/insert" enctype="multipart/form-data">
+			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/insert">
 
 				<div class="mb-3">
 
@@ -44,7 +43,7 @@
 				
 				<div class="mb-3">
 
-					<label for="reg_id">작성자</label>
+					<label for="reg_id">첨부파일선택</label>
 
 					<input type="file" class="form-control" name="imgs" id="reg_id" placeholder="이름을 입력해 주세요">
 
@@ -53,6 +52,7 @@
 				<input type="submit" class="btn btn-sm btn-primary" value="저장">
 				<button type="button" class="btn btn-sm btn-primary"  onclick="location.href='/board/list'" id="btnList">목록</button>
 			</form>
+
 
 			<div >
 
