@@ -15,7 +15,7 @@
 		<div class="container" role="main">
 
 			<h2>게시판 글쓰기</h2>
-			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/insert">
+			<form name="form" id="form" role="form" method="post" action="${pageContext.request.contextPath}/board/insert" enctype="multipart/form-data">
 
 				<div class="mb-3">
 

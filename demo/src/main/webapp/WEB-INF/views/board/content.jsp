@@ -24,8 +24,11 @@
 		<img src="${pageContext.request.contextPath}/board/getimg?no=${obj.brd_no}" width="100px" height="100px" /><br />
 		<hr />
 		<a href="${pageContext.request.contextPath}/board/list" class="btn btn-success">목록</a>
-		<a href="${pageContext.request.contextPath}/board/update?no=${obj.brd_no}" class="btn btn-success">수정</a>
-		<a href="${pageContext.request.contextPath}/board/delete?no=${obj.brd_no}" class="btn btn-success">삭제</a>
+		<a href="${pageContext.request.contextPath}/board/boardupdate?no=${obj.brd_no}" class="btn btn-success">수정</a>
+		<form action="/board/deleteone">
+			<input type="hidden" name="no" value="${obj.brd_no}"/>
+			<input type="submit" value="삭제"/>
+		</form>
 		
 		<c:if test="${prev != 0}">
 		<a href="${pageContext.request.contextPath}/board/content?no=${prev}" class="btn btn-success">이전글</a>

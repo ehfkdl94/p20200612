@@ -15,12 +15,14 @@
 				BRD_NO, BRD_TITLE, BRD_ID, BRD_HIT, BRD_DATE, 
 				ROW_NUMBER() OVER (ORDER BY BRD_NO DESC) ROWN 
 			FROM 
-				BOARD)
+				BOARD
+			WHERE
+				BRD_TITLE LIKE '%' || #{text} || '%')
 		WHERE ROWN BETWEEN #{start} AND #{end}
 	</select>
 	
-	<select id="count" resultType="int">
-		SELECT COUNT(*) FROM BOARD
+	<select id="count" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM BOARD WHERE BRD_TITLE LIKE '%' || #{text} || '%'
 	</select>
 	
 	<select id="selectBoardOne" parameterType="int" resultType="com.example.vo.BoardVO">
@@ -28,8 +30,17 @@
 	</select>
 	
 	<update id="updateHit" parameterType="int">
-		UPDATE BOARD SET BRD_HIT = BRD_HIT + 1
+		UPDATE BOARD SET BRD_HIT = BRD_HIT + 3
 		WHERE BRD_NO=#{no}
+	</update>
+	
+	<update id="updateBoard" parameterType="com.example.vo.BoardVO">
+		UPDATE BOARD 
+		SET 
+			BRD_TITLE = #{brd_title},
+			BRD_CONTENT = #{brd_content}
+		WHERE 
+			BRD_NO=#{brd_no}
 	</update>
 	
 	<insert id="insertItemBatch" parameterType="java.util.List">
@@ -50,4 +61,8 @@
 	<select id="selectBoardImg" parameterType="int" resultMap="img1">
 		SELECT BRD_NO, BRD_IMG FROM BOARD WHERE BRD_NO=#{no}
 	</select>
+	
+	<delete id="deleteItemOne" parameterType="int">
+		DELETE FROM BOARD WHERE BRD_NO=#{no}
+	</delete>
 </mapper>

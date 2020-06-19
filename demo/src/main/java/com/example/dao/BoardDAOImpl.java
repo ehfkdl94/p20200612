@@ -34,8 +34,7 @@ public class BoardDAOImpl implements BoardDAO {
 
 	@Override
 	public int updateBoard(BoardVO obj) {
-		// TODO Auto-generated method stub
-		return 0;
+		return sqlFatory.openSession().insert("Board.updateBoard", obj);
 	}
 
 	@Override
@@ -45,8 +44,8 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public int countBoard() {
-		return sqlFatory.openSession().selectOne("Board.count");
+	public int countBoard(String text) {
+		return sqlFatory.openSession().selectOne("Board.count", text);
 	}
 
 	@Override
@@ -62,6 +61,11 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public BoardVO selectBoardImg(int no) {
 		return sqlFatory.openSession().selectOne("Board.selectBoardImg", no);
+	}
+
+	@Override
+	public int deleteItemOne(int no) {
+		return sqlFatory.openSession().delete("Board.deleteItemOne", no);
 	}
 
 
